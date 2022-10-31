@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.appproductptkb.data.network.response.DataItem
+import com.example.appproductptkb.data.network.response.ResponseDetail
 import com.example.appproductptkb.data.network.response.ResponseListProduct
 import retrofit2.Call
 import retrofit2.Callback
@@ -45,6 +46,32 @@ class RemoteDataSource (private val apiService: ApiService) {
             }
 
         })
+        return data
+    }
+
+    fun getDetail(id: String) : LiveData<ResponseDetail>{
+        val data = MutableLiveData<ResponseDetail>()
+
+        val client = apiService.getById(id)
+        client.enqueue(object : Callback<ResponseDetail>{
+            override fun onResponse(
+                call: Call<ResponseDetail>,
+                response: Response<ResponseDetail>
+            ) {
+                val responseBody = response.body()
+                if (responseBody != null && response.isSuccessful){
+                    data.value = responseBody
+                }else{
+                    Log.d("APIRESPONSE", response.message())
+                }
+            }
+
+            override fun onFailure(call: Call<ResponseDetail>, t: Throwable) {
+                Log.d("APIRESPONSE", t.message.toString())
+            }
+
+        })
+
         return data
     }
 }

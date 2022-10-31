@@ -10,4 +10,5 @@
     <color name="bg_discount">#1F2456</color>
     <color name="color_price_diskon">#FF8195</color>
     <color name="rating_color">#F7CE0C</color>
+    <color name="line">#F2F5F9</color>
 </resources>

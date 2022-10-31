@@ -1,5 +1,6 @@
 package com.example.appproductptkb.presentation.ui
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -8,6 +9,7 @@ import com.example.appproductptkb.data.network.response.DataItem
 import com.example.appproductptkb.databinding.ItemProductBinding
 import com.example.appproductptkb.helper.Discount
 import com.example.appproductptkb.helper.FormatIDR
+import com.example.appproductptkb.presentation.detail.DetailActivity
 
 class ListAdapter() : RecyclerView.Adapter<ListAdapter.itemViewHolder>() {
     private val ListProduct = ArrayList<DataItem>()
@@ -27,6 +29,11 @@ class ListAdapter() : RecyclerView.Adapter<ListAdapter.itemViewHolder>() {
                 txtPriceDiskon.setText(Discount.dc(data.price!!, data.discount!!))
                 txtRc.setText(data.countRatingUser.toString())
                 ratingBar.rating = data.productRating!!.toFloat()
+            }
+
+            itemView.setOnClickListener {
+                val move = Intent(itemView.context, DetailActivity::class.java)
+                itemView.context.startActivity(move)
             }
 
         }
