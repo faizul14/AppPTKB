@@ -11,4 +11,6 @@
     <color name="color_price_diskon">#FF8195</color>
     <color name="rating_color">#F7CE0C</color>
     <color name="line">#F2F5F9</color>
+    <color name="bg_shimer">#dddddd</color>
+    <color name="clr_sl">#475DDB</color>
 </resources>
