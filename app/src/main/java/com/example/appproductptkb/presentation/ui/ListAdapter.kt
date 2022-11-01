@@ -33,6 +33,7 @@ class ListAdapter() : RecyclerView.Adapter<ListAdapter.itemViewHolder>() {
 
             itemView.setOnClickListener {
                 val move = Intent(itemView.context, DetailActivity::class.java)
+                move.putExtra(DetailActivity.DATA_ID, data.id)
                 itemView.context.startActivity(move)
             }
 

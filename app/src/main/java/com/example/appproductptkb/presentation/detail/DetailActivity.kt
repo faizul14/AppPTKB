@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
@@ -32,13 +33,18 @@ class DetailActivity : AppCompatActivity() {
             setHasFixedSize(true)
         }
 
-        loadData("1")
+        val data_id = intent.getStringExtra(DATA_ID)
+
+        if (data_id != null){
+            loadData(data_id)
+        }
     }
 
     private fun loadData(id: String) {
        viewModel.getData(id).observe(this){data->
            if (data != null){
                data.data?.let { renderView(it) }
+               data.error?.let { getLoading(it) }
            }
        }
     }
@@ -59,6 +65,22 @@ class DetailActivity : AppCompatActivity() {
         loadKoment(data.comment as List<CommentItem>)
     }
 
+    fun getLoading(status: Boolean){
+        if (!status){
+            binding.apply {
+                nstd.visibility = View.VISIBLE
+                cardView2.visibility = View.VISIBLE
+                prgBar.visibility = View.GONE
+            }
+        }else{
+            binding.apply {
+                nstd.visibility = View.GONE
+                cardView2.visibility = View.GONE
+                prgBar.visibility = View.VISIBLE
+            }
+        }
+    }
+
 
 
     private fun loadKoment(data: List<CommentItem>) {
@@ -66,6 +88,10 @@ class DetailActivity : AppCompatActivity() {
                 adapter.setData(data)
                 binding.rvKomen.adapter = adapter
 
+    }
+
+    companion object{
+        const val DATA_ID ="data_id"
     }
 
 }

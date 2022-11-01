@@ -7,7 +7,20 @@
     android:outlineSpotShadowColor="@color/black"
     tools:context=".presentation.detail.DetailActivity">
 
+    <ProgressBar
+        android:id="@+id/prg_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="348dp"
+        android:visibility="gone"
+        android:foregroundGravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/nstd"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/cardView2"
@@ -162,6 +175,7 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView2"
+        android:visibility=""
         android:layout_width="match_parent"
         android:layout_height="140dp"
         app:cardCornerRadius="1dp"
